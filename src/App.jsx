@@ -21,7 +21,7 @@ function App() {
         }
         return nextHour;
       });
-    }, 3000);
+    }, 12000);
     return () => clearInterval(interval);
   }, []);
 
@@ -37,7 +37,7 @@ function App() {
         }
         return nextMinute;
       });
-    }, 50);
+    }, 200);
     return () => clearInterval(interval);
   }, []);
 
@@ -53,7 +53,7 @@ function App() {
         }
         return nextSecond;
       });
-    }, 0.8333);
+    }, 3.333);
     return () => clearInterval(interval);
   }, []);
 
