@@ -1,0 +1,41 @@
+.hourHand {
+  border: 5px solid black;
+  background: black;
+  width: 60%;
+  margin-left: 50%;
+}
+
+.hourContainer {
+  position: absolute;
+  left: 36.5%;
+  top: 49.75%;
+  width: 20vw;
+}
+
+.minuteHand {
+  border: 3px solid black;
+  background: black;
+  width: 100%;
+  margin-left: 50%;
+}
+
+.minuteContainer {
+  position: absolute;
+  left: 36.5%;
+  top: 50%;
+  width: 20vw;
+}
+
+.secondHand {
+  border: 1px solid red;
+  background: red;
+  width: 100%;
+  margin-left: 50%;
+}
+
+.secondContainer {
+  position: absolute;
+  left: 36.5%;
+  top: 50.25%;
+  width: 20vw;
+}

@@ -1,4 +1,4 @@
-import "./MinuteHand.css";
+import "./Hands.css";
 
 export default function MinuteHand({ minute }) {
   return (

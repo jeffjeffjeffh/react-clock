@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 
-import Ticks from "./Ticks";
-import Numbers from "./Numbers";
-import HourHand from "./HourHand";
-import MinuteHand from "./MinuteHand";
+import Ticks from "./Ticks/Ticks";
+import Numbers from "./Numbers/Numbers";
+import HourHand from "./Hands/HourHand";
+import MinuteHand from "./Hands/MinuteHand";
+import SecondHand from "./Hands/SecondHand";
 
 import "./App.css";
 
 function App() {
   const [hour, setHour] = useState(9);
-  const [minute, setMinute] = useState(45);
-
   useEffect(() => {
     let interval = setInterval(() => {
       setHour((prevHour) => {
@@ -26,6 +25,7 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const [minute, setMinute] = useState(45);
   useEffect(() => {
     let interval = setInterval(() => {
       setMinute((prevMinute) => {
@@ -41,17 +41,31 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const [second, setSecond] = useState(45);
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setSecond((prevSecond) => {
+        let nextSecond;
+        if (prevSecond == 60) {
+          nextSecond = 1;
+        } else {
+          nextSecond = prevSecond + 1;
+        }
+        return nextSecond;
+      });
+    }, 0.8333);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main>
-      <button className="test" onClick={() => console.log(hour)}>
-        clicky
-      </button>
       <div className="clock">
         <Ticks />
         <Numbers />
         <div className="center"></div>
         <HourHand hour={hour} />
         <MinuteHand minute={minute} />
+        <SecondHand second={second} />
       </div>
     </main>
   );

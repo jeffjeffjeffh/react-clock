@@ -1,0 +1,12 @@
+.number {
+  font-size: 3rem;
+}
+
+.numberContainer {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: 46.5%;
+  left: 0.5%;
+  width: 99%;
+}

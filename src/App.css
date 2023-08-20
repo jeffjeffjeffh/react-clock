@@ -18,14 +18,8 @@ main {
 
 .center {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 5px solid darkgoldenrod;
+  top: 49.5%;
+  left: 49.5%;
+  border: 7px solid black;
   border-radius: 50%;
-}
-
-.test {
-  position:absolute;
-  top: 80%;
-  left: 80%;
 }
