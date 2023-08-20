@@ -1,0 +1,13 @@
+.minuteHand {
+  border: 3px solid darkgoldenrod;
+  background: darkgoldenrod;
+  width: 70%;
+  margin-left: 50%;
+}
+
+.minuteContainer {
+  position: absolute;
+  left: 36.5%;
+  top: 50%;
+  width: 20vw;
+}

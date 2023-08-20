@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+
+import Ticks from "./Ticks";
+import Numbers from "./Numbers";
+import HourHand from "./HourHand";
+import MinuteHand from "./MinuteHand";
+
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [hour, setHour] = useState(9);
+  const [minute, setMinute] = useState(45);
+
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setHour((prevHour) => {
+        let nextHour;
+        if (prevHour == 12) {
+          nextHour = 1;
+        } else {
+          nextHour = prevHour + 1;
+        }
+        return nextHour;
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setMinute((prevMinute) => {
+        let nextMinute;
+        if (prevMinute == 60) {
+          nextMinute = 1;
+        } else {
+          nextMinute = prevMinute + 1;
+        }
+        return nextMinute;
+      });
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main>
+      <button className="test" onClick={() => console.log(hour)}>
+        clicky
+      </button>
+      <div className="clock">
+        <Ticks />
+        <Numbers />
+        <div className="center"></div>
+        <HourHand hour={hour} />
+        <MinuteHand minute={minute} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </main>
+  );
 }
 
-export default App
+export default App;
