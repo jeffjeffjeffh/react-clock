@@ -1,10 +1,10 @@
 import "./Hands.css";
 
-export default function HourHand({ hour }) {
+export default function HourHand({ hours }) {
   return (
     <div
       className="hourContainer"
-      style={{ transform: `rotate(${hour * 30}deg)` }}
+      style={{ transform: `rotate(${hours * 30 - 90}deg)` }}
     >
       <div className="hourHand"></div>
     </div>

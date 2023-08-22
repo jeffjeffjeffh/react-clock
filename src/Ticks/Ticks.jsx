@@ -12,7 +12,7 @@ function generateTicks(num) {
   for (let i = 1; i <= num; i++) {
     rotation += 30;
 
-    ticks.push(<Tick rotation={rotation} />);
+    ticks.push(<Tick key={i} rotation={rotation} />);
   }
   return ticks;
 }

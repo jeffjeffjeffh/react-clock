@@ -1,72 +1,96 @@
 import { useState, useEffect } from "react";
 
+import useRealTime from "./utils/useRealTime";
+
+import Hands from "./Hands/Hands";
 import Ticks from "./Ticks/Ticks";
 import Numbers from "./Numbers/Numbers";
-import HourHand from "./Hands/HourHand";
-import MinuteHand from "./Hands/MinuteHand";
-import SecondHand from "./Hands/SecondHand";
 
 import "./App.css";
 
 function App() {
-  const [hour, setHour] = useState(9);
+  // FAKE TIME
+  const [fakeTime, setFakeTime] = useState({
+    hours: 12,
+    minutes: 0,
+    seconds: 0,
+  });
+
   useEffect(() => {
-    let interval = setInterval(() => {
-      setHour((prevHour) => {
-        let nextHour;
-        if (prevHour == 12) {
-          nextHour = 1;
-        } else {
-          nextHour = prevHour + 1;
+    const updateTime = () => {
+      setFakeTime((prevTime) => {
+        const newTime = { ...prevTime };
+
+        newTime.seconds++;
+        if (newTime.seconds === 61) {
+          newTime.seconds = 1;
+          newTime.minutes++;
+          if (newTime.minutes === 61) {
+            newTime.minutes = 1;
+            newTime.hours++;
+            if (newTime.hours === 13) {
+              newTime.hours = 1;
+            }
+          }
         }
-        return nextHour;
+
+        return { ...newTime };
       });
-    }, 12000);
+    };
+    const interval = setInterval(updateTime, 0.01);
     return () => clearInterval(interval);
   }, []);
 
-  const [minute, setMinute] = useState(45);
-  useEffect(() => {
-    let interval = setInterval(() => {
-      setMinute((prevMinute) => {
-        let nextMinute;
-        if (prevMinute == 60) {
-          nextMinute = 1;
-        } else {
-          nextMinute = prevMinute + 1;
-        }
-        return nextMinute;
-      });
-    }, 200);
-    return () => clearInterval(interval);
-  }, []);
+  // REAL TIME
+  const realTime = useRealTime();
 
-  const [second, setSecond] = useState(45);
-  useEffect(() => {
-    let interval = setInterval(() => {
-      setSecond((prevSecond) => {
-        let nextSecond;
-        if (prevSecond == 60) {
-          nextSecond = 1;
-        } else {
-          nextSecond = prevSecond + 1;
-        }
-        return nextSecond;
-      });
-    }, 3.333);
-    return () => clearInterval(interval);
-  }, []);
+  // BUTTON HANDLER
+  const [timeType, setTimeType] = useState("real");
 
+  const handleTypeButton = (e) => {
+    const { id } = e.target;
+    console.log(id);
+    if (id === "fake") {
+      setTimeType("fake");
+      setFakeTime(() => {
+        return {
+          hours: realTime.getHours(),
+          minutes: realTime.getMinutes(),
+          seconds: realTime.getSeconds(),
+        };
+      });
+    } else {
+      setTimeType("real");
+    }
+  };
+
+  // JSX
   return (
     <main>
       <div className="clock">
         <Ticks />
         <Numbers />
         <div className="center"></div>
-        <HourHand hour={hour} />
-        <MinuteHand minute={minute} />
-        <SecondHand second={second} />
+        {timeType === "fake" ? (
+          <Hands time={fakeTime} />
+        ) : (
+          <Hands time={realTime} />
+        )}
       </div>
+      <button
+        id="real"
+        style={{ position: "absolute", top: "95%", left: "20%" }}
+        onClick={handleTypeButton}
+      >
+        The Normal, Boring Time
+      </button>
+      <button
+        id="fake"
+        style={{ position: "absolute", top: "95%", left: "70%" }}
+        onClick={handleTypeButton}
+      >
+        BLAZINGLY FAST TIME
+      </button>
     </main>
   );
 }

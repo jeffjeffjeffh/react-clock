@@ -8,7 +8,7 @@ export default function Numbers() {
 function generateNumbers(num) {
   const numbers = [];
   for (let i = 1; i <= num; i++) {
-    numbers.push(<Number num={i} />);
+    numbers.push(<Number key={i} num={i} />);
   }
   return numbers;
 }
