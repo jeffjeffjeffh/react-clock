@@ -79,14 +79,14 @@ function App() {
       </div>
       <button
         id="real"
-        style={{ position: "absolute", top: "95%", left: "20%" }}
+        style={{ position: "absolute", top: "1150px", left: "300px" }}
         onClick={handleTypeButton}
       >
         The Normal, Boring Time
       </button>
       <button
         id="fake"
-        style={{ position: "absolute", top: "95%", left: "70%" }}
+        style={{ position: "absolute", top: "1150px", left: "800px" }}
         onClick={handleTypeButton}
       >
         BLAZINGLY FAST TIME

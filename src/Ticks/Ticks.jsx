@@ -25,8 +25,8 @@ function Tick({ rotation }) {
         transform: `rotate(${rotation}deg)`,
       }}
     >
-      <div className="tick" style={{ marginRight: "400px" }}></div>
-      <div className="tick" style={{ marginLeft: "400px" }}></div>
+      <div className="tick" style={{ marginRight: "460px" }}></div>
+      <div className="tick" style={{ marginLeft: "460px" }}></div>
     </div>
   );
 }
